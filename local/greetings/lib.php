@@ -15,41 +15,38 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * TODO describe file index
+ * Callback implementations for Greetings
  *
  * @package    local_greetings
  * @copyright  2024 Andrew Rowatt <A.J.Rowatt@massey.ac.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once('../../config.php');
-require_once($CFG->dirroot. '/local/greetings/lib.php');
-require_login();
 
-$context = context_system::instance();
-$PAGE->set_context($context);
+/**
+ * Constructs a greeting tailored by country
+ *
+ * Basic constructor for the widget object.
+ *
+ * @param  object   $user    $USER
+ */
+function local_greetings_get_greeting($user) {
+    if ($user == null) {
+        return get_string('greetinguser', 'local_greetings');
+    }
 
-$PAGE->set_url(new moodle_url('/local/greetings/index.php'));
-$PAGE->set_pagelayout('standard');
+    $country = $user->country;
+    switch ($country) {
+        case 'ES':
+            $langstr = 'greetinguseres';
+            break;
+        case 'NZ':
+                $langstr = 'greetingusernz';
+                break;
+        default:
+            $langstr = 'greetingloggedinuser';
+            break;
+    }
 
-
-$PAGE->set_title(get_string('pluginname', 'local_greetings'));
-$PAGE->set_heading(get_string('pluginname', 'local_greetings'));
-
-
-echo $OUTPUT->header();
-
-if (isloggedin()) {
-    echo html_writer::tag('h3', local_greetings_get_greeting($USER), [
-        'class' => 'ajr_class',
-    ]);
-} else {
-    echo html_writer::tag('h3', get_string('greetinguser', 'local_greetings'), [
-        'class' => 'ajr_class',
-    ]);
+    return get_string($langstr, 'local_greetings', fullname($user));
 }
-
-
-
-
-echo $OUTPUT->footer();
