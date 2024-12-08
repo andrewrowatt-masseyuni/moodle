@@ -36,6 +36,8 @@ use stdClass;
  * @category  test
  * @copyright 2020 Andrew Nicols <andrew@nicols.co.uk>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
+ * @covers \core_user\table\participants_search
  */
 final class participants_search_test extends advanced_testcase {
 
@@ -799,7 +801,7 @@ final class participants_search_test extends advanced_testcase {
      *
      * @return array
      */
-    public function country_provider(): array {
+    public static function country_provider(): array {
         $tests = [
             'users' => [
                 'user1' => 'DE',
@@ -996,7 +998,7 @@ final class participants_search_test extends advanced_testcase {
      *
      * @return array
      */
-    public function keywords_provider(): array {
+    public static function keywords_provider(): array {
         $tests = [
             // Users where the keyword matches basic user fields such as names and email.
             'Users with basic names' => (object) [
@@ -1544,7 +1546,7 @@ final class participants_search_test extends advanced_testcase {
      *
      * @return array
      */
-    public function status_provider(): array {
+    public static function status_provider(): array {
         $tests = [
             // Users with different statuses and enrolment methods (so multiple statuses are possible for the same user).
             'Users with different enrolment statuses' => (object) [
@@ -1801,7 +1803,7 @@ final class participants_search_test extends advanced_testcase {
      *
      * @return array
      */
-    public function enrolments_provider(): array {
+    public static function enrolments_provider(): array {
         $tests = [
             // Users with different enrolment methods.
             'Users with different enrolment methods' => (object) [
@@ -2027,7 +2029,7 @@ final class participants_search_test extends advanced_testcase {
      *
      * @return array
      */
-    public function groups_provider(): array {
+    public static function groups_provider(): array {
         $tests = [
             'Users in different groups' => (object) [
                 'groupsavailable' => [
@@ -2368,7 +2370,7 @@ final class participants_search_test extends advanced_testcase {
      *
      * @return array
      */
-    public function groups_separate_provider(): array {
+    public static function groups_separate_provider(): array {
         $tests = [
             'Users in different groups with separate groups mode enabled' => (object) [
                 'groupsavailable' => [
@@ -2730,7 +2732,7 @@ final class participants_search_test extends advanced_testcase {
      *
      * @return array
      */
-    public function accesssince_provider(): array {
+    public static function accesssince_provider(): array {
         $tests = [
             // Users with different last access times.
             'Users in different groups' => (object) [
@@ -3137,7 +3139,7 @@ final class participants_search_test extends advanced_testcase {
      *
      * @return array
      */
-    public function filterset_joins_provider(): array {
+    public static function filterset_joins_provider(): array {
         $tests = [
             // Users with different configurations.
             'Users with different configurations' => (object) [
@@ -3507,5 +3509,45 @@ final class participants_search_test extends advanced_testcase {
         }
 
         return $finaltests;
+    }
+
+    /**
+     * Tests sorting of participants in a course.
+     *
+     * This test runs a search for participants twice, first with an "ORDER BY" clause and second without.
+     * The test asserts the correct ordering of participants based on the sorting condition.
+     */
+    public function test_sort_participants(): void {
+        $this->resetAfterTest();
+
+        $course = $this->getDataGenerator()->create_course();
+        $coursecontext = context_course::instance($course->id);
+
+        // Generate users with their role.
+        $this->getDataGenerator()->create_and_enrol($course, 'teacher');
+        $this->getDataGenerator()->create_and_enrol($course, 'student');
+
+        // Create the basic filter.
+        $filterset = new participants_filterset();
+        $filterset->add_filter(new integer_filter('courseid', null, [(int) $course->id]));
+
+        // Run the search with using ORDER BY.
+        $search = new participants_search($course, $coursecontext, $filterset);
+        $rs = $search->get_participants(
+            sort: 'ORDER     BY id', // Adding spaces between "ORDER" and "BY" is intentional.
+        );
+        $records = $this->convert_recordset_to_array($rs);
+        $userids = array_keys($records);
+        $this->assertGreaterThan($userids[0], $userids[1]);
+
+        // Run the search without using ORDER BY.
+        $rs = $search->get_participants(
+            sort: 'id DESC',
+        );
+        $records = $this->convert_recordset_to_array($rs);
+        $userids = array_keys($records);
+        $this->assertGreaterThan($userids[1], $userids[0]);
+
+        $rs->close();
     }
 }

@@ -1276,7 +1276,7 @@ class course_test extends \advanced_testcase {
      *
      * @return array
      */
-    public function enrolment_uploaddata_error_provider(): array {
+    public static function enrolment_uploaddata_error_provider(): array {
         return [
             ['errorcannotcreateorupdateenrolment', [
                 'shortname' => 'C1',
@@ -1504,7 +1504,7 @@ class course_test extends \advanced_testcase {
         // Create our custom field.
         $category = $this->get_customfield_generator()->create_category();
         $this->create_custom_field($category, 'date', 'mydate',
-            ['mindate' => strtotime('2020-04-01'), 'maxdate' => '2020-04-30']);
+            ['mindate' => strtotime('2020-04-01'), 'maxdate' => strtotime('2020-04-30')]);
 
         $mode = tool_uploadcourse_processor::MODE_UPDATE_ONLY;
         $updatemode = tool_uploadcourse_processor::UPDATE_ALL_WITH_DATA_ONLY;

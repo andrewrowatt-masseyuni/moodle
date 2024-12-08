@@ -6,9 +6,20 @@ More detailed information on key changes can be found in the [Developer update n
 
 The format of this change log follows the advice given at [Keep a CHANGELOG](https://keepachangelog.com).
 
-## 4.5+
+## 4.5.1
 
 ### core
+
+#### Added
+
+- `\core\output\activity_header` now uses the `is_title_allowed()` method when setting the title in the constructor.
+
+  This method has been improved to give priority to the 'notitle' option in the theme config for the current page layout, over the top-level option in the theme.
+
+  For example, the Boost theme sets `$THEME->activityheaderconfig['notitle'] = true;` by default, but in its `secure` pagelayout, it has `'notitle' = false`.
+  This prevents display of the title in all layouts except `secure`.
+
+  For more information see [MDL-75610](https://tracker.moodle.org/browse/MDL-75610)
 
 #### Changed
 
@@ -23,6 +34,14 @@ The format of this change log follows the advice given at [Keep a CHANGELOG](htt
 
   For more information see [MDL-81308](https://tracker.moodle.org/browse/MDL-81308)
 
+### core_courseformat
+
+#### Added
+
+- Add core_courseformat\base::invalidate_all_session_caches to reset course editor cache for all users when course is changed. This method can be used as an alternative to core_courseformat\base::session_cache_reset for resetting the cache for the current user  in case the change in the course should be reflected for all users.
+
+  For more information see [MDL-83185](https://tracker.moodle.org/browse/MDL-83185)
+
 ### core_enrol
 
 #### Changed
@@ -33,6 +52,14 @@ The format of this change log follows the advice given at [Keep a CHANGELOG](htt
 
   For more information see [MDL-83432](https://tracker.moodle.org/browse/MDL-83432)
 
+### core_form
+
+#### Changed
+
+- The `cohort` form element now accepts new `includes` option, which is passed to the corresponding external service to determine which cohorts to return (self, parents, all)
+
+  For more information see [MDL-83641](https://tracker.moodle.org/browse/MDL-83641)
+
 ### core_reportbuilder
 
 #### Changed
@@ -40,6 +67,20 @@ The format of this change log follows the advice given at [Keep a CHANGELOG](htt
 - The `get_active_conditions` method of the base report class has a new `$checkavailable` parameter to determine whether to check the returned conditions availability
 
   For more information see [MDL-82809](https://tracker.moodle.org/browse/MDL-82809)
+
+### mod_quiz
+
+#### Changed
+
+- The `\mod_quiz\attempt_walkthrough_from_csv_test` unit test has been marked as final and should not be extended by other tests.
+
+  All shared functionality has been moved to a new autoloadable test-case:
+  `\mod_quiz\tests\attempt_walkthrough_testcase`.
+
+  To support this testcase the existing `$files` instance property should be replaced with a new static method, `::get_test_files`.
+  Both the existing instance property and the new static method can co-exist.
+
+  For more information see [MDL-81521](https://tracker.moodle.org/browse/MDL-81521)
 
 ## 4.5
 
