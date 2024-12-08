@@ -47,7 +47,7 @@ $deleteanypost = has_capability('local/greetings:deleteanymessage', $context);
 $action = optional_param('action', '', PARAM_TEXT);
 
 if ($action == 'del') {
-    // Display standard Moodle error    
+    // Display standard (unfriendly) Moodle error    
     require_capability('local/greetings:deleteanymessage', $context);
 
     if ($deleteanypost) {
