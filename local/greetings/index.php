@@ -57,7 +57,8 @@ if ($action == 'del') {
 
         $DB->delete_records('local_greetings_messages', ['id' => $id]);
 
-        // Cleans/removes sesskey information from the URL as this is a security vulerability. We are only using this approach for the learning process.
+        // Cleans/removes sesskey information from the URL as this is a security vulerability.
+        // We are only using this approach for the learning process.
         redirect($PAGE->url);
     }
 }
