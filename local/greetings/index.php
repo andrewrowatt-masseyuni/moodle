@@ -47,13 +47,16 @@ $deleteanypost = has_capability('local/greetings:deleteanymessage', $context);
 $action = optional_param('action', '', PARAM_TEXT);
 
 if ($action == 'del') {
-    // Display standard (unfriendly) Moodle error    
+    // Display standard (unfriendly) Moodle error.
     require_capability('local/greetings:deleteanymessage', $context);
+
+    require_sesskey();
 
     if ($deleteanypost) {
         $id = required_param('id', PARAM_TEXT);
 
         $DB->delete_records('local_greetings_messages', ['id' => $id]);
+        redirect($PAGE->url);
     }
 }
 
@@ -118,7 +121,7 @@ if ($allowview) {
             echo html_writer::link(
                 new moodle_url(
                     '/local/greetings/index.php',
-                    ['action' => 'del', 'id' => $m->id]
+                    ['action' => 'del', 'id' => $m->id, 'sesskey' => sesskey()]
                 ),
                 $OUTPUT->pix_icon('t/delete', '') . get_string('delete')
             );
