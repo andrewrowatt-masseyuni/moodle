@@ -43,6 +43,7 @@ if (isguestuser()) {
 $allowpost = has_capability('local/greetings:postmessages', $context);
 $allowview = has_capability('local/greetings:viewmessages', $context);
 $deleteanypost = has_capability('local/greetings:deleteanymessage', $context);
+$editanypost = has_capability('local/greetings:editanymessage', $context);
 
 $action = optional_param('action', '', PARAM_TEXT);
 
@@ -119,6 +120,18 @@ if ($allowview) {
         echo html_writer::tag('small', userdate($m->timecreated), ['class' => 'text-muted']);
         echo html_writer::end_tag('p');
         echo html_writer::end_tag('div');
+
+        if ($editanypost || $m->userid == $USER->id) {
+            echo html_writer::start_tag('p', ['class' => 'card-footer text-center']);
+            echo html_writer::link(
+                new moodle_url(
+                    '/local/greetings/index.php',
+                    ['action' => 'edit', 'id' => $m->id, 'sesskey' => sesskey()]
+                ),
+                $OUTPUT->pix_icon('t/edit', '') . get_string('edit')
+            );
+            echo html_writer::end_tag('p');
+        }
 
         if ($deleteanypost) {
             echo html_writer::start_tag('p', ['class' => 'card-footer text-center']);

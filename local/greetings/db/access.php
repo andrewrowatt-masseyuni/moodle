@@ -52,4 +52,12 @@ $capabilities = [
             'manager' => CAP_ALLOW,
         ],
     ],
+    'local/greetings:editanymessage' => [
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+    ],
 ];
