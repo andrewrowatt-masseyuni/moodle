@@ -41,8 +41,8 @@ function local_greetings_get_greeting($user) {
             $langstr = 'greetinguseres';
             break;
         case 'NZ':
-                $langstr = 'greetingusernz';
-                break;
+            $langstr = 'greetingusernz';
+            break;
         default:
             $langstr = 'greetingloggedinuser';
             break;
