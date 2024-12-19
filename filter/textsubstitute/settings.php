@@ -30,6 +30,25 @@ if ($hassiteconfig) {
 
     // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedIf
     if ($ADMIN->fulltree) {
-        // TODO: Define actual plugin settings page and add it to the tree - {@link https://docs.moodle.org/dev/Admin_settings}.
+        $settings->add(new admin_setting_configtext(
+            'filter_textsubstitute/searchterm',
+            get_string('searchterm', 'filter_textsubstitute'),
+            get_string('searchtermdesc', 'filter_textsubstitute'),
+            '',
+        ));
+
+        $settings->add(new admin_setting_configtext(
+            'filter_textsubstitute/substituteterm',
+            get_string('substituteterm', 'filter_textsubstitute'),
+            get_string('substitutetermdesc', 'filter_textsubstitute'),
+            '',
+        ));
+
+        $settings->add(new admin_setting_configmulticheckbox('filter_textsubstitute/formats',
+            get_string('settingformats', 'filter_textsubstitute'),
+            get_string('settingformatsdesc', 'filter_textsubstitute'),
+            [FORMAT_HTML => 1, FORMAT_MARKDOWN => 1, FORMAT_MOODLE => 1],
+            format_text_menu(),
+        ));
     }
 }

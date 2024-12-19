@@ -25,4 +25,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['filtername'] = 'Text substitute';
 $string['pluginname'] = 'Text substitute';
+$string['searchterm'] = 'Old term';
+$string['searchtermdesc'] = 'The old term to replace.';
+$string['settingformats'] = 'Apply to formats';
+$string['settingformatsdesc'] = 'The filter will be applied only if the original text was inserted in one of the selected formats.';
+$string['substituteterm'] = 'Substitute term';
+$string['substitutetermdesc'] = 'The new term to substitute the old term with.';

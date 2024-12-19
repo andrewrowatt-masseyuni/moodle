@@ -24,7 +24,7 @@ namespace filter_textsubstitute;
  * @copyright   2024 Andrew Rowatt <A.J.Rowatt@massey.ac.nz>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class filter_test extends \advanced_testcase {
+final class filter_test extends \advanced_testcase {
 
     // Write the tests here as public funcions.
     // Please refer to {@link https://docs.moodle.org/dev/PHPUnit} for more details on PHPUnit tests in Moodle.
@@ -36,7 +36,7 @@ class filter_test extends \advanced_testcase {
      *
      * @coversNothing
      */
-    public function test_dummy() {
+    public function test_dummy(): void {
         $this->assertTrue(false);
     }
 }
