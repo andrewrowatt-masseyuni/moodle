@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['filtername'] = 'Text substitute';
 $string['pluginname'] = 'Text substitute';
+$string['privacy:metadata'] = 'Substitute text strings. This plugin does not store any personal data.';
 $string['searchterm'] = 'Old term';
 $string['searchtermdesc'] = 'The old term to replace.';
 $string['settingformats'] = 'Apply to formats';
