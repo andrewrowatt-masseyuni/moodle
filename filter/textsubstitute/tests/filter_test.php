@@ -29,7 +29,7 @@ final class filter_test extends \advanced_testcase {
     // Write the tests here as public funcions.
     // Please refer to {@link https://docs.moodle.org/dev/PHPUnit} for more details on PHPUnit tests in Moodle.
 
-/**
+    /**
      * Check that search terms are substituted with another given term when filtered.
      *
      * @param string $text Original text
@@ -38,7 +38,8 @@ final class filter_test extends \advanced_testcase {
      *
      * @covers ::filter()
      */
-    public function test_filter_textsubstitute($searchterm, $substituteterm, $formats, $originalformat, $inputtext, $expectedtext) {
+    public function
+        test_filter_textsubstitute($searchterm, $substituteterm, $formats, $originalformat, $inputtext, $expectedtext): void {
         $this->resetAfterTest(true);
         $this->setAdminUser();
 
@@ -85,7 +86,7 @@ final class filter_test extends \advanced_testcase {
                 'substituteterm' => 'Workplace',
                 'formats' => FORMAT_MARKDOWN,
                 'originalformat' => FORMAT_HTML,
-                'inputtext' =>    '<em>Moodle</em> is a popular LMS. You can download Moodle for free. MOODLE 4.2 is here.',
+                'inputtext' => '<em>Moodle</em> is a popular LMS. You can download Moodle for free. MOODLE 4.2 is here.',
                 'expectedtext' => '<em>Moodle</em> is a popular LMS. You can download Moodle for free. MOODLE 4.2 is here.',
             ],
         ];
