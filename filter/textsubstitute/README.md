@@ -1,8 +1,8 @@
 # Text substitute #
 
-TODO Describe the plugin shortly here.
+Simple text substitution filter
 
-TODO Provide more detailed description here.
+Dynamically substitutes one string for another
 
 ## Installing via uploaded ZIP file ##
 
