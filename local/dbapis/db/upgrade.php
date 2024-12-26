@@ -39,5 +39,33 @@ function xmldb_local_dbapis_upgrade($oldversion) {
     // You will also have to create the db/install.xml file by using the XMLDB Editor.
     // Documentation for the XMLDB Editor can be found at {@link https://docs.moodle.org/dev/XMLDB_editor}.
 
+    if ($oldversion < 2023081001) {
+
+        // Define table local_dbapis_history to be created.
+        $table = new xmldb_table('local_dbapis_history');
+
+        // Adding fields to table local_dbapis_history.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('messageid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('message', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+        $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+
+        // Adding keys to table local_dbapis_history.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+        // Conditionally launch create table for local_dbapis_history.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Copy data over.
+        $records = $DB->get_records_sql('select id as messageid, message, userid, timecreated from {local_dbapis}');
+        $DB->insert_records('local_dbapis_history',$records);
+
+        // Dbapis savepoint reached.
+        upgrade_plugin_savepoint(true, 2023081001, 'local', 'dbapis');
+    }
+
     return true;
 }

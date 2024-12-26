@@ -36,3 +36,49 @@ function local_dbapis_extend_navigation_frontpage(navigation_node $frontpage) {
         );
     }
 }
+
+/**
+ * Add a post to the database.
+ *
+ * @param string $message text of the message.
+ */
+function addpost(string $message): void {
+    global $USER;
+    global $DB;
+
+    $userid = $USER->id;
+
+    $record = new stdClass;
+    $record->message = $message;
+    $record->timecreated = time();
+    $record->userid = $USER->id;
+
+    $DB->insert_record('local_dbapis', $record);
+}
+
+/**
+ * Search the database.
+ *
+ * @param string $searchterm text to find in the messages.
+ */
+function searchposts(string $searchterm): array {
+    global $DB;
+
+    $likesearchterm = $DB->sql_like('message',':searchterm');
+
+    $result = $DB->get_records_sql("select m.*, u.firstname,u.lastname from {local_dbapis} m LEFT JOIN {user} u ON u.id = m.userid where {$likesearchterm}",['searchterm' => '%'.$searchterm.'%']);
+    
+    return $result;
+}
+
+/**
+ * Delete a message
+ *
+ * @param int $id ID of message to delete.
+ */
+function deletepost(int $id): void {
+    global $DB;
+
+    $DB->delete_records('local_dbapis',['id' => $id]);
+}
+

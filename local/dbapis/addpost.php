@@ -23,6 +23,7 @@
  */
 
 require_once('../../config.php');
+require_once($CFG->dirroot. '/local/dbapis/lib.php');
 
 $context = context_system::instance();
 $PAGE->set_context($context);
@@ -52,7 +53,7 @@ if ($data = $messageform->get_data()) {
 
     // We are getting the user input as is.
     // TODO: Ensure user input is safe to use.
-    $message = required_param('message', PARAM_RAW);
+    $message = required_param('message', PARAM_TEXT);
 
     // We are just displaying the form data here.
     // TODO: Save the data to the database.
@@ -65,6 +66,8 @@ if ($data = $messageform->get_data()) {
     echo html_writer::link($PAGE->url, get_string('continue'), ['class' => 'btn btn-link']);
 
     echo $OUTPUT->footer();
+
+    addpost($message);
 
     exit;
 }

@@ -23,6 +23,7 @@
  */
 
 require_once('../../config.php');
+require_once($CFG->dirroot. '/local/dbapis/lib.php');
 
 $context = context_system::instance();
 $PAGE->set_context($context);
@@ -60,6 +61,18 @@ if ($data = $searchform->get_data()) {
 
     echo html_writer::start_tag('div', ['class' => 'border p-3 my-3']);
     echo $searchterm;
+
+    foreach(searchposts($searchterm) as $m) {
+        echo html_writer::start_tag('p', ['class' => '']);
+        echo $OUTPUT->single_button(
+            new moodle_url('/local/dbapis/deletepost.php',
+                ['returnurl' => $PAGE->url,'id' => $m->id]),
+            get_string('delete')
+        );
+        echo $m->id . ', ' . $m->message . ', ' 
+        . $m->firstname . ' ' . $m->lastname;
+        echo html_writer::end_tag('p');
+    }
     echo html_writer::end_tag('div');
 
     echo html_writer::link($PAGE->url, get_string('continue'), ['class' => 'btn btn-link']);
