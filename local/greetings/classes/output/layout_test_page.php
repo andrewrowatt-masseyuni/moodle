@@ -14,30 +14,43 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace local_greetings\output;
+
+use renderable;
+use renderer_base;
+use templatable;
+use stdClass;
+
 /**
- * TODO describe file layout-test
+ * Class layout_test_page
  *
  * @package    local_greetings
  * @copyright  2024 Andrew Rowatt <A.J.Rowatt@massey.ac.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class layout_test_page implements renderable, templatable {
+    /** @var string $sometext Some text to pass data to a template. */
+    private $sometext = null;
 
-require('../../config.php');
+    /**
+     * Standard constructor.
+     *
+     * @param string $sometext Default text.
+     */
+    public function __construct(string $sometext) {
+        $this->sometext = $sometext;
+    }
 
-require_login();
+    /**
+     * Export data to be used as the context for a mustache template.
+     *
+     * @return stdClass
+     */
+    public function export_for_template(renderer_base $output): stdClass {
+        $data = new stdClass();
+        $data->sometext = $this->sometext;
+        $data->grades = [10,99];
 
-$url = new moodle_url('/local/greetings/layout-test.php', []);
-$PAGE->set_url($url);
-$PAGE->set_pagelayout('standard');
-$PAGE->set_context(context_system::instance());
-
-$PAGE->set_heading($SITE->fullname);
-
-$output = $PAGE->get_renderer('local_greetings');
-echo $output->header();
-
-$sometext = 'Here is some content but it can be anything else, too.';
-$renderable = new \local_greetings\output\layout_test_page($sometext);
-echo $output->render($renderable);
-
-echo $output->footer();
+        return $data;
+    }
+}
