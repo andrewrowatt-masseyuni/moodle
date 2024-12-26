@@ -38,7 +38,7 @@ final class lib_test extends \advanced_testcase {
      * @param string|null $country User country
      * @param string $langstring Greetings message language string
      */
-    public function test_local_greetings_get_greeting(?string $country, string $langstring) {
+    public function test_local_greetings_get_greeting(?string $country, string $langstring): void {
         $user = null;
         if (!empty($country)) {
             $this->resetAfterTest(true);
@@ -54,7 +54,7 @@ final class lib_test extends \advanced_testcase {
      *
      * @return array List of data sets - (string) data set name => (array) data
      */
-    public static function local_greetings_get_greeting_provider() {
+    public static function local_greetings_get_greeting_provider(): array {
         return [
             'No user' => [ // Not logged in.
                 'country' => null,
