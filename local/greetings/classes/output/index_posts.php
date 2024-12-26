@@ -22,23 +22,28 @@ use templatable;
 use stdClass;
 
 /**
- * Class layout_test_page
+ * Class index_posts
  *
  * @package    local_greetings
- * @copyright  2024 Andrew Rowatt <A.J.Rowatt@massey.ac.nz>
+ * @copyright  2024 YOUR NAME <your@email.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class layout_test_page implements renderable, templatable {
-    /** @var string $sometext Some text to pass data to a template. */
-    private $sometext = null;
+class index_posts  implements renderable, templatable {
+    /** @var string $messages Some text to pass data to a template. */
+    private $messages = null;
+
+    /** @var string $backgroundcolor Some text to pass data to a template. */
+    private $backgroundcolor = null;
 
     /**
      * Standard constructor.
      *
-     * @param string $sometext Default text.
+     * @param array $messages Mesages to display.
+     * @param string $backgroundcolor Default card color.
      */
-    public function __construct(string $sometext) {
-        $this->sometext = $sometext;
+    public function __construct(array $messages, string $backgroundcolor) {
+        $this->messages = $messages;
+        $this->backgroundcolor = $backgroundcolor;
     }
 
     /**
@@ -48,9 +53,8 @@ class layout_test_page implements renderable, templatable {
      */
     public function export_for_template(renderer_base $output): stdClass {
         $data = new stdClass();
-        $data->sometext = $this->sometext;
-        $data->grades = [10, 99];
-
+        $data->messages = $this->messages;
+        $data->backgroundcolor = $this->backgroundcolor;
         return $data;
     }
 }

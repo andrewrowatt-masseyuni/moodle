@@ -1,0 +1,53 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_greetings/index_posts
+
+    TODO describe template index-posts
+
+    Example context (json):
+    {
+    }
+}}
+
+
+<div class="box py-3 card-columns">
+{{^messages}}
+    <p>You do not have any messages.</p>
+{{/messages}}
+{{#messages}}
+<div class="card" style="background:{{backgroundcolor}}">
+<div class="card-body">
+<p class="card-text">{{message}}</p>
+<p class="card-text">Posted by {{by}}.</p>
+<p class="card-text"><small class="text-muted">{{date}}</small></p>
+</div>
+{{#canedit}}
+<p class="card-footer text-center">
+	<a href="http://localhost/moodle/local/greetings/index.php?action=edit&amp;id=2&amp;sesskey=bATN6Isnw1">
+	<i class="icon fa fa-pen fa-fw " aria-hidden="true"></i>Edit</a>
+</p>
+{{/canedit}}
+{{#candelete}}
+<p class="card-footer text-center">
+	<a href="http://localhost/moodle/local/greetings/index.php?action=del&amp;id=2&amp;sesskey=bATN6Isnw1">
+	<i class="icon fa fa-trash-can fa-fw " aria-hidden="true"></i>Delete</a>
+</p>
+{{/candelete}}
+</div>
+{{/messages}}
+</div>
