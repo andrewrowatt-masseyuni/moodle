@@ -63,3 +63,18 @@ function local_greetings_extend_navigation_frontpage(navigation_node $frontpage)
         navigation_node::TYPE_CUSTOM,
     );
 }
+
+/**
+ * Insert a link to index.php on any course page.
+ *
+ * @param navigation_node $node Course node.
+ */
+function local_greetings_extend_navigation_course(navigation_node $node) {
+    if (isloggedin() && !isguestuser()) {
+        $node->add(
+            get_string('pluginname', 'local_greetings'),
+            new moodle_url('/local/greetings/index.php'),
+            navigation_node::TYPE_CUSTOM,
+        );
+    }
+}

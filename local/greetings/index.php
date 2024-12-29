@@ -82,6 +82,7 @@ if ($data = $messageform->get_data()) {
 }
 
 $output = $PAGE->get_renderer('local_greetings');
+
 echo $output->header();
 
 if (isloggedin()) {
