@@ -24,45 +24,45 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
+$capabilities = [
 
-    'block/greetings:myaddinstance' => array(
+    'block/greetings:myaddinstance' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
-            'user' => CAP_ALLOW
-        ),
+        'archetypes' => [
+            'user' => CAP_ALLOW,
+        ],
 
-        'clonepermissionsfrom' => 'moodle/my:manageblocks'
-    ),
-    'block/greetings:postmessages' => array(
+        'clonepermissionsfrom' => 'moodle/my:manageblocks',
+    ],
+    'block/greetings:postmessages' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
+        'archetypes' => [
             'user' => CAP_ALLOW,
-        )
-    ),
-    'block/greetings:viewmessages' => array(
+        ],
+        ],
+    'block/greetings:viewmessages' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
+        'archetypes' => [
             'user' => CAP_ALLOW,
-        )
-    ),
-    'block/greetings:deleteownmessage' => array(
+        ],
+        ],
+    'block/greetings:deleteownmessage' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
+        'archetypes' => [
             'user' => CAP_ALLOW,
-        )
-    ),
-    'block/greetings:deleteanymessage' => array(
+        ],
+        ],
+    'block/greetings:deleteanymessage' => [
         'riskbitmask' => RISK_DATALOSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
+        'archetypes' => [
             'manager' => CAP_ALLOW,
-        )
-    ),
-);
+        ],
+        ],
+    ];
