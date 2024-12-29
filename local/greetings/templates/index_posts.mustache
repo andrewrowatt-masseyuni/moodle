@@ -51,3 +51,7 @@
 </div>
 {{/messages}}
 </div>
+<p>JS below</p>
+{{#js}}
+require(['local_greetings/helloworld'], (module) => module.init('{{first}}', '{{last}}'));
+{{/js}}

@@ -35,15 +35,23 @@ class index_posts  implements renderable, templatable {
     /** @var string $backgroundcolor Some text to pass data to a template. */
     private $backgroundcolor = null;
 
+    /** @var string $first Some text to pass data to a template. */
+    private $first = null;
+
+    /** @var string $last Some text to pass data to a template. */
+    private $last = null;
+
     /**
      * Standard constructor.
      *
      * @param array $messages Mesages to display.
      * @param string $backgroundcolor Default card color.
      */
-    public function __construct(array $messages, string $backgroundcolor) {
+    public function __construct(array $messages, string $backgroundcolor, string $first, string $last) {
         $this->messages = $messages;
         $this->backgroundcolor = $backgroundcolor;
+        $this->first = $first;
+        $this->last = $last;
     }
 
     /**
@@ -55,6 +63,8 @@ class index_posts  implements renderable, templatable {
         $data = new stdClass();
         $data->messages = $this->messages;
         $data->backgroundcolor = $this->backgroundcolor;
+        $data->first = $this->first;
+        $data->last = $this->last;
         return $data;
     }
 }
