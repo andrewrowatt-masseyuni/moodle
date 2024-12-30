@@ -43,6 +43,8 @@ class block_greetings extends block_base {
     public function get_content() {
         global $CFG, $DB, $OUTPUT, $USER;
 
+        $this->page->requires->js_call_amd('block_greetings/helloworld', 'init');
+
         if ($this->content !== null) {
             return $this->content;
         }
