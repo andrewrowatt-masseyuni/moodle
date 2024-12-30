@@ -111,7 +111,11 @@ class block_greetings extends block_base {
             }
 
             if ($allowpost) {
-                $text .= $messageform->render();
+                $messageform->set_data_for_dynamic_submission(); 
+                // Render the form in a specific container, there should be nothing else in the same container.
+                
+                // echo html_writer::div($form->render(), '', ['id' => 'formcontainer']);
+                $text .= '<div id="formcontainer">' . $messageform->render() . '</div>';
             }
 
             if (has_capability('local/greetings:viewmessages', $context)) {

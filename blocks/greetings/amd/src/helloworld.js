@@ -21,6 +21,20 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+import DynamicForm from 'core_form/dynamicform';
+
+const dynamicForm = new DynamicForm(document.querySelector('#formcontainer'), 'block_greetings\\form\\message_form');
+
 export const init = () => {
+    dynamicForm.addEventListener(dynamicForm.events.FORM_SUBMITTED, (e) => {
+        e.preventDefault();
+        const response = e.detail;
+        window.console.log(response);
+        // It is recommended to reload the form after submission because the elements may change.
+        // This will also remove previous submission errors. You will need to pass the same arguments to the form
+        // that you passed when you rendered the form on the page.
+        dynamicForm.load({arg1: 'val1'});
+    });
+
     window.console.log(`Hello from JavaScript.`);
 };
