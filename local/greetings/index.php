@@ -126,7 +126,10 @@ if ($allowview) {
     }
 }
 
-$renderable = new \local_greetings\output\index_posts($messagesmustache, get_config('local_greetings', 'messagecardbgcolor'),'firstname here','lastname here!');
+$renderable = new \local_greetings\output\index_posts($messagesmustache,
+    get_config('local_greetings', 'messagecardbgcolor'),
+    'firstname here', 'lastname here!');
+
 echo $output->render($renderable);
 
 echo $output->footer();

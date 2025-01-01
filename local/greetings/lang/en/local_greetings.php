@@ -25,7 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['emptymessage'] = 'You must enter a message to post.';
 $string['greetingloggedinuser'] = 'Greetings, {$a}.';
+$string['greetings'] = 'Greetings';
 $string['greetings:deleteanymessage'] = 'Delete any messages';
 $string['greetings:editanymessage'] = 'Edit any messages';
 $string['greetings:postmessages'] = 'Post a new message on the Greetings wall';
@@ -35,8 +37,12 @@ $string['greetinguserau'] = 'Hello, {$a}.';
 $string['greetinguseres'] = 'Hola, {$a}.';
 $string['greetinguserfj'] = 'Bula, {$a}.';
 $string['greetingusernz'] = 'Kia Ora, {$a}.';
+$string['hello'] = 'Hello World';
 $string['messagecardbgcolor'] = 'Message card color';
 $string['messagecardbgcolordesc'] = 'Background color of the message card';
+$string['nomessages'] = 'No messages have been posted yet.';
 $string['pluginname'] = 'Greetings';
 $string['postedby'] = 'Posted by {$a}.';
+$string['submit'] = 'Submit';
 $string['yourmessage'] = 'Your message';
+$string['yourmessagehint'] = 'Enter your message here';
