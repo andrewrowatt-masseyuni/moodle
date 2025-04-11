@@ -7,3 +7,6 @@
 [submodule "blocks/notices"]
 	path = blocks/notices
 	url = https://github.com/andrewrowatt-masseyuni/moodle-block_notices.git
+[submodule "grade/grading/form/btec"]
+	path = grade/grading/form/btec
+	url = https://github.com/andrewrowatt-masseyuni/moodle-gradingform_btec.git
