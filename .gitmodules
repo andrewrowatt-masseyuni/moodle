@@ -1,0 +1,6 @@
+[submodule "filter/filtercodes"]
+	path = filter/filtercodes
+	url = https://github.com/andrewrowatt-masseyuni/moodle-filter_filtercodes.git
+[submodule "report/dashboard"]
+	path = report/dashboard
+	url = https://github.com/andrewrowatt-masseyuni/moodle-report_dashboard.git
