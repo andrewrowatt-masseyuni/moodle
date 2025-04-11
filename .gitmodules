@@ -4,3 +4,6 @@
 [submodule "report/dashboard"]
 	path = report/dashboard
 	url = https://github.com/andrewrowatt-masseyuni/moodle-report_dashboard.git
+[submodule "blocks/notices"]
+	path = blocks/notices
+	url = https://github.com/andrewrowatt-masseyuni/moodle-block_notices.git
