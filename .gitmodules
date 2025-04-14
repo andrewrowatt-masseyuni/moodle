@@ -13,3 +13,6 @@
 [submodule "mod/simplelabel"]
 	path = mod/simplelabel
 	url = https://github.com/andrewrowatt-masseyuni/moodle-mod_simplelabel.git
+[submodule "local/faultreporting"]
+	path = local/faultreporting
+	url = https://github.com/andrewrowatt-masseyuni/moodle-local_faultreporting.git
