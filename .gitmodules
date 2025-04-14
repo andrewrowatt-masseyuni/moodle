@@ -10,3 +10,6 @@
 [submodule "grade/grading/form/btec"]
 	path = grade/grading/form/btec
 	url = https://github.com/andrewrowatt-masseyuni/moodle-gradingform_btec.git
+[submodule "mod/simplelabel"]
+	path = mod/simplelabel
+	url = https://github.com/andrewrowatt-masseyuni/moodle-mod_simplelabel.git
