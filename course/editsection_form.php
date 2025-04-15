@@ -39,6 +39,9 @@ class editsection_form extends moodleform {
         $mform->setDefault('name', $sectioninfo->name);
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
 
+        /* AJR Test */
+        $mform->addElement('static', 'description', '[Label name]','[Label description]');
+
         /// Prepare course and the editor
 
         $mform->addElement('editor', 'summary_editor', get_string('description'), null, $this->_customdata['editoroptions']);
