@@ -16,3 +16,6 @@
 [submodule "local/faultreporting"]
 	path = local/faultreporting
 	url = https://github.com/andrewrowatt-masseyuni/moodle-local_faultreporting.git
+[submodule "mod/webpart"]
+	path = mod/webpart
+	url = https://github.com/andrewrowatt-masseyuni/moodle-mod_webpart.git
