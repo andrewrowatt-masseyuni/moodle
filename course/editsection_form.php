@@ -40,7 +40,9 @@ class editsection_form extends moodleform {
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
 
         /* AJR Test */
-        $mform->addElement('static', 'description', '[Label name]','[Label description]');
+        $mform->addElement('text', 'name2', 'Name2');
+        $mform->setType('name2', PARAM_RAW);
+
 
         /// Prepare course and the editor
 
@@ -108,6 +110,9 @@ class editsection_form extends moodleform {
             // we need object for file_prepare_standard_editor
             $default_values = (object)$default_values;
         }
+        /* AJR Test */
+        $default_values->name2 = 'Name2';
+
         $editoroptions = $this->_customdata['editoroptions'];
         $default_values = file_prepare_standard_editor($default_values, 'summary', $editoroptions,
                 $editoroptions['context'], 'course', 'section', $default_values->id);
@@ -128,6 +133,9 @@ class editsection_form extends moodleform {
             if ($data->name === false) {
                 $data->name = '';
             }
+            /* AJR Test */
+            $data->name = trim($data->name) . ':' . $data->name2;
+
             $data = file_postupdate_standard_editor($data, 'summary', $editoroptions,
                     $editoroptions['context'], 'course', 'section', $data->id);
             $course = $this->_customdata['course'];
