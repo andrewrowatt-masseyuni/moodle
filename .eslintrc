@@ -14,7 +14,8 @@
     // See http://eslint.org/docs/user-guide/configuring#specifying-environments
     // Note: The YUI override must exactly match this when disabling the ES6+ version because those features are not supported by Shifter.
     'es2020': true,
-    'amd': true
+    'amd': true,
+    "jest/globals": true
   },
   'globals': {
     'M': true,
