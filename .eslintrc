@@ -15,7 +15,7 @@
     // Note: The YUI override must exactly match this when disabling the ES6+ version because those features are not supported by Shifter.
     'es2020': true,
     'amd': true,
-    "jest/globals": true
+    "jest": true
   },
   'globals': {
     'M': true,
