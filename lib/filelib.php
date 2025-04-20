@@ -855,7 +855,7 @@ function file_get_all_files_in_draftarea(int $draftitemid, string $filepath = '/
 
     if (!empty($draftfiles)) {
         foreach ($draftfiles->list as $draftfile) {
-            if ($draftfile->type == 'file') {
+            if ($draftfile->type !== 'folder') {
                 $files[] = $draftfile;
             }
         }
@@ -1311,6 +1311,19 @@ function file_save_draft_area_files($draftitemid, $contextid, $component, $filea
     } else {
         return file_rewrite_urls_to_pluginfile($text, $draftitemid, $forcehttps);
     }
+}
+
+/**
+ * Clear a draft area.
+ *
+ * @param int $draftitemid Id of the draft area to clear.
+ * @return boolean success
+ */
+function file_clear_draft_area(int $draftitemid): bool {
+    global $USER;
+    $fs = get_file_storage();
+    $usercontext = context_user::instance($USER->id);
+    return $fs->delete_area_files($usercontext->id, 'user', 'draft', $draftitemid);
 }
 
 /**

@@ -34,7 +34,7 @@ require_once($CFG->dirroot . '/question/type/ddimageortext/tests/helper.php');
  * @copyright 2010 The Open University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class walkthrough_test extends \qbehaviour_walkthrough_test_base {
+final class walkthrough_test extends \qbehaviour_walkthrough_test_base {
 
     /**
      * Get an expectation that the output contains an item ready to drag.
@@ -68,6 +68,8 @@ class walkthrough_test extends \qbehaviour_walkthrough_test_base {
         $this->check_current_mark(null);
 
         $this->check_current_output(
+            new \question_pattern_expectation(
+                '~<div class="dropzones" data-place-info=~'),
             $this->get_contains_drag_image_home_expectation(1, 1, 1),
             $this->get_contains_drag_image_home_expectation(2, 2, 1),
             $this->get_contains_drag_image_home_expectation(3, 1, 2),

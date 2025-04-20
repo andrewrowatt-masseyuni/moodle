@@ -16,7 +16,7 @@
 
 namespace core\route\api;
 
-use core\tests\route_testcase;
+use core\tests\router\route_testcase;
 
 /**
  * Tests for Templates API.
@@ -64,7 +64,17 @@ final class templates_test extends route_testcase {
                 ['core/modal'],
                 [],
             ],
-            'foo' => [
+            'fetch nested template' => [
+                'boost/core/local/modal/alert',
+                [
+                    'core/local/modal/alert',
+                    'core/modal',
+                ],
+                [
+                    'moodle/ok',
+                ],
+            ],
+            'multiple templates' => [
                 'boost/core/notification',
                 [
                     'core/notification',

@@ -75,21 +75,46 @@ export default class {
      * @param {number} targetSectionNum target section number
      * @param {number} targetCmId optional target cm id
      */
-        async _callAddModuleWebservice(courseId, modName, targetSectionNum, targetCmId) {
-            const args = {
-                courseid: courseId,
-                modname: modName,
-                targetsectionnum: targetSectionNum,
-            };
-            if (targetCmId) {
-                args.targetcmid = targetCmId;
-            }
-            let ajaxresult = await ajax.call([{
-                methodname: 'core_courseformat_create_module',
-                args,
-            }])[0];
-            return JSON.parse(ajaxresult);
+    async _callAddModuleWebservice(courseId, modName, targetSectionNum, targetCmId) {
+        const args = {
+            courseid: courseId,
+            modname: modName,
+            targetsectionnum: targetSectionNum,
+        };
+        if (targetCmId) {
+            args.targetcmid = targetCmId;
         }
+        let ajaxresult = await ajax.call([{
+            methodname: 'core_courseformat_create_module',
+            args,
+        }])[0];
+        return JSON.parse(ajaxresult);
+    }
+
+    /**
+     * Private method to call core_courseformat_new_module webservice.
+     *
+     * @method _callEditWebservice
+     * @param {number} courseId
+     * @param {string} modName module name
+     * @param {number} targetSectionId target section number
+     * @param {number} targetCmId optional target cm id
+     */
+    async _callNewModuleWebservice(courseId, modName, targetSectionId, targetCmId) {
+        const args = {
+            courseid: courseId,
+            modname: modName,
+            targetsectionid: targetSectionId,
+        };
+        if (targetCmId) {
+            args.targetcmid = targetCmId;
+        }
+        let ajaxresult = await ajax.call([{
+            methodname: 'core_courseformat_new_module',
+            args,
+        }])[0];
+        return JSON.parse(ajaxresult);
+    }
 
     /**
      * Execute a basic section state action.
@@ -440,6 +465,29 @@ export default class {
     }
 
     /**
+     * Add a new module to a specific course section.
+     *
+     * @param {StateManager} stateManager the current state manager
+     * @param {string} modName the modulename to add
+     * @param {number} targetSectionId the target section id
+     * @param {number} targetCmId optional the target cm id
+     */
+    async newModule(stateManager, modName, targetSectionId, targetCmId) {
+        if (!modName) {
+            throw new Error(`Mutation newModule requires moduleName`);
+        }
+        if (!targetSectionId) {
+            throw new Error(`Mutation newModule requires targetSectionId`);
+        }
+        if (!targetCmId) {
+            targetCmId = 0;
+        }
+        const course = stateManager.get('course');
+        const updates = await this._callNewModuleWebservice(course.id, modName, targetSectionId, targetCmId);
+        stateManager.processUpdates(updates);
+    }
+
+    /**
      * Mark or unmark course modules as dragging.
      *
      * @param {StateManager} stateManager the current state manager
@@ -470,9 +518,20 @@ export default class {
      * @param {array} cmIds the list of course modules ids
      * @param {bool} complete the new completion value
      */
-    cmCompletion(stateManager, cmIds, complete) {
-        const newValue = (complete) ? 1 : 0;
-        this._setElementsValue(stateManager, 'cm', cmIds, 'completionstate', newValue);
+    async cmCompletion(stateManager, cmIds, complete) {
+        const newState = (complete) ? 1 : 0;
+        const action = (newState == 1) ? 'cm_complete' : 'cm_uncomplete';
+        const logEntry = this._getLoggerEntry(stateManager, action, cmIds);
+        stateManager.setReadOnly(false);
+        cmIds.forEach((id) => {
+            const element = stateManager.get('cm', id);
+            if (element) {
+                element.isoverallcomplete = complete;
+                element.completionstate = newState;
+            }
+        });
+        stateManager.setReadOnly(true);
+        stateManager.addLoggerEntry(await logEntry);
     }
 
     /**

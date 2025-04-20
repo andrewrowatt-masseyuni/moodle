@@ -64,7 +64,7 @@ require_once($CFG->dirroot . '/course/lib.php');
  * @copyright  2012 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class courselib_test extends advanced_testcase {
+final class courselib_test extends advanced_testcase {
 
     /**
      * Load required libraries and fixtures.
@@ -3697,7 +3697,16 @@ class courselib_test extends advanced_testcase {
                 $time + YEARSECS,
                 $time + WEEKSECS,
                 $time + YEARSECS
-            ]
+            ],
+            // Time shift is between exact times, not midnight(s) (MDL-65233).
+            [
+                $time + HOURSECS,
+                $time + DAYSECS,
+                $time + WEEKSECS + HOURSECS,
+                false,
+                $time + WEEKSECS + HOURSECS,
+                $time + WEEKSECS + DAYSECS,
+            ],
         ];
     }
 

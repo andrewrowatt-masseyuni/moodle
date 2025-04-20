@@ -20,7 +20,7 @@ use core\param;
 use core\router\route;
 use core\router\schema\referenced_object;
 use core\router\schema\specification;
-use core\tests\route_testcase;
+use core\tests\router\route_testcase;
 use invalid_parameter_exception;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Routing\RouteContext;
@@ -64,9 +64,18 @@ final class path_parameter_test extends route_testcase {
      */
     public static function is_required_provider(): array {
         return [
+            ['/is/not/found', false],
+            ['/is/not/found/{values}', false],
+            ['/is/not/found/{values:.*}', false],
+            ['/is/not/found/{values:.*?}', false],
             ['/is/required/{value}', true],
+            ['/is/required/{value:.*}', true],
+            ['/is/required/{value:.*?}/example', true],
             ['/is/optional/[{value}]', false],
             ['/is/[optional/[{value}]]', false],
+            ['/is/[optional/[{value:.*}]]', false],
+            ['/is/[optional/[{value:.*?}/example]]', false],
+            ['/is/required/{value}[/example]', true],
         ];
     }
 

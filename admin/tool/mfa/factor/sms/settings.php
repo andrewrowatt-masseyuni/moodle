@@ -25,38 +25,46 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-global $CFG;
-// Get the gateway records.
-$manager = \core\di::get(\core_sms\manager::class);
-$gatewayrecords = $manager->get_gateway_records(['enabled' => 1]);
-$smsconfigureurl = new moodle_url(
-    '/sms/configure.php',
-    [
-        'returnurl' => new moodle_url(
-            '/admin/settings.php',
-            ['section' => 'factor_sms'],
-        ),
-    ],
-);
-$smsconfigureurl = $smsconfigureurl->out();
+if ($ADMIN->fulltree) {
+    // Get the gateway records.
+    $manager = \core\di::get(\core_sms\manager::class);
+    $gatewayrecords = $manager->get_gateway_records(['enabled' => 1]);
+    $smsconfigureurl = new moodle_url(
+        '/sms/configure.php',
+        [
+            'returnurl' => new moodle_url(
+                '/admin/settings.php',
+                ['section' => 'factor_sms'],
+            ),
+        ],
+    );
+    $smsconfigureurl = $smsconfigureurl->out();
 
-$settings->add(
-    new admin_setting_heading(
-        'factor_sms/heading',
-        '',
-        new lang_string(
-            'settings:heading',
-            'factor_sms',
+    $settings->add(
+        new admin_setting_heading(
+            'factor_sms/heading',
+            '',
+            new lang_string(
+                'settings:heading',
+                'factor_sms',
+            ),
         ),
-    ),
-);
+    );
 
-if (count($gatewayrecords) > 0) {
+    // Get available gateways, or link to gateway creation.
     $gateways = [0 => new lang_string('none')];
-    foreach ($gatewayrecords as $record) {
-        $values = explode('\\', $record->gateway);
-        $gatewayname = new lang_string('pluginname', $values[0]);
-        $gateways[$record->id] = $record->name . ' (' . $gatewayname . ')';
+    if (count($gatewayrecords) > 0) {
+        foreach ($gatewayrecords as $record) {
+            $values = explode('\\', $record->gateway);
+            $gatewayname = new lang_string('pluginname', $values[0]);
+            $gateways[$record->id] = $record->name . ' (' . $gatewayname . ')';
+        }
+    } else {
+        $notify = new \core\output\notification(
+            get_string('settings:setupdesc', 'factor_sms', $smsconfigureurl),
+            \core\output\notification::NOTIFY_WARNING
+        );
+        $settings->add(new admin_setting_heading('factor_sms/setupdesc', '', $OUTPUT->render($notify)));
     }
 
     $settings->add(
@@ -92,7 +100,6 @@ if (count($gatewayrecords) > 0) {
             PARAM_INT,
         ),
     );
-    $settings->hide_if('factor_sms/weight', 'factor_sms/enabled');
 
     $settings->add(
         new admin_setting_configduration(
@@ -101,19 +108,6 @@ if (count($gatewayrecords) > 0) {
             new lang_string('settings:duration_help', 'tool_mfa'),
             30 * MINSECS,
             MINSECS,
-        ),
-    );
-    $settings->hide_if('factor_sms/duration', 'factor_sms/enabled');
-} else {
-    $settings->add(
-        new admin_setting_description(
-            'factor_sms/setupdesc',
-            '',
-            new lang_string(
-                'settings:setupdesc',
-                'factor_sms',
-                $smsconfigureurl,
-            ),
         ),
     );
 }

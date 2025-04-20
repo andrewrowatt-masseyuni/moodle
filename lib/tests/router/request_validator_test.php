@@ -21,7 +21,7 @@ use core\router\schema\parameters\path_parameter;
 use core\router\schema\parameters\query_parameter;
 use core\router\schema\request_body;
 use core\router\schema\response\content\payload_response_type;
-use core\tests\route_testcase;
+use core\tests\router\route_testcase;
 use GuzzleHttp\Psr7\ServerRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpNotFoundException;
@@ -87,34 +87,6 @@ final class request_validator_test extends route_testcase {
         $this->assertInstanceOf(
             ServerRequestInterface::class,
             $validator->validate_request($request),
-        );
-    }
-
-    /**
-     * When a defined pathtype is missing from the path.
-     */
-    public function test_validate_request_missing_path_component(): void {
-        // A route with a parameter defined in the path, but no pathtype for it.
-        $route = new route(
-            path: '/example/123',
-            pathtypes: [
-                new path_parameter(
-                    name: 'required',
-                    type: param::INT,
-                ),
-            ],
-        );
-
-        $request = $this->get_request_for_routed_route($route, '/example/123');
-
-        $validator = \core\di::get(request_validator::class);
-        $this->expectException(\coding_exception::class);
-        $this->expectExceptionMessageMatches('/Route.*has 0 arguments.* 1 pathtypes./');
-        $result = $validator->validate_request($request);
-
-        $this->assertInstanceOf(
-            ServerRequestInterface::class,
-            $result,
         );
     }
 

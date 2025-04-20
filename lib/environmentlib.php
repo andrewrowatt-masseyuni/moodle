@@ -1053,14 +1053,15 @@ function environment_check_database($version, $env_select) {
 
     $dbinfo = $DB->get_server_info();
     $current_version = normalize_version($dbinfo['version']);
-    $needed_version = $vendors[$current_vendor];
 
-/// Check we have a needed version
-    if (!$needed_version) {
+    // Check we have a needed version.
+    if (empty($vendors[$current_vendor])) {
         $result->setStatus(false);
         $result->setErrorCode(NO_DATABASE_VENDOR_VERSION_FOUND);
         return $result;
     }
+
+    $needed_version = $vendors[$current_vendor];
 
     // Check if the DB Vendor has been properly configured.
     // Hack: this is required when playing with MySQL and MariaDB since they share the same PHP module and base DB classes,
@@ -1697,4 +1698,15 @@ function restrict_php_version_82($result) {
  */
 function restrict_php_version_83($result) {
     return restrict_php_version($result, '8.3');
+}
+
+/**
+ * Check if the current PHP version is greater than or equal to
+ * PHP version 8.4
+ *
+ * @param \environment_results $result an environment_results instance
+ * @return bool result of version check
+ */
+function restrict_php_version_84(environment_results $result) {
+    return restrict_php_version($result, '8.4');
 }

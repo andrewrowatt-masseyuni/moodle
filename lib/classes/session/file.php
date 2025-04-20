@@ -53,9 +53,9 @@ class file extends handler {
         }
         // Need to disable debugging since disk_free_space()
         // will fail on very large partitions (see MDL-19222).
-        $freespace = @disk_free_space($this->sessiondir);
-        // MDL-43039: disk_free_space() returns null if disabled.
-        if (!($freespace > 2048) and ($freespace !== false) and ($freespace !== null)) {
+        // Moodle supports disable_functions = disk_free_space (MDL-43039).
+        $freespace = function_exists('disk_free_space') ? disk_free_space($this->sessiondir) : false;
+        if (!($freespace > 2048) && ($freespace !== false)) {
             throw new exception('sessiondiskfull', 'error');
         }
 
@@ -82,7 +82,7 @@ class file extends handler {
             }
         }
 
-        return true;
+        return parent::destroy_all();
     }
 
     #[\Override]
@@ -96,6 +96,6 @@ class file extends handler {
             @unlink($sessionfile);
         }
 
-        return true;
+        return parent::destroy($id);
     }
 }

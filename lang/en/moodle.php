@@ -194,7 +194,7 @@ $string['backupdaterecordtype'] = '<br />{$a->recordtype} - {$a->recordname}<br 
 $string['backupdetails'] = 'Backup details';
 $string['backuperrorinvaliddestination'] = 'The backup destination folder does not exist or is not writable.';
 $string['backupexecuteathelp'] = 'Choose what time automated backups should run at.';
-$string['backupfailed'] = 'Some of your courses weren\'t saved!!';
+$string['backupfailed'] = 'Some of your courses weren\'t saved.';
 $string['backupfilename'] = 'backup';
 $string['backupfinished'] = 'Backup completed successfully';
 $string['backupfromthissite'] = 'Backup was made on this site?';
@@ -221,6 +221,8 @@ $string['block'] = 'Block';
 $string['blockconfiga'] = 'Configuring a {$a} block';
 $string['blockconfigbad'] = 'This block has not been implemented correctly and thus cannot provide a configuration interface.';
 $string['blocks'] = 'Blocks';
+$string['blocks_main'] = 'Main content blocks';
+$string['blocks_supplementary'] = 'Supplementary blocks';
 $string['blocksaddedit'] = 'Add/Edit blocks';
 $string['blockseditoff'] = 'Blocks editing off';
 $string['blocksediton'] = 'Blocks editing on';
@@ -347,7 +349,7 @@ $string['courseadministration'] = 'Course administration';
 $string['courseapprovedemail'] = 'Your requested course is approved, <a href="{$a->url}">{$a->name}</a>, and you are a {$a->teacher}.';
 $string['courseapprovedemail2'] = 'Your requested course is approved: <a href="{$a->url}">{$a->name}</a>.';
 $string['courseapprovedfailed'] = 'Failed to save the course as approved!';
-$string['courseapprovedsubject'] = 'Your course has been approved!';
+$string['courseapprovedsubject'] = 'Your course has been approved.';
 $string['courseavailable'] = 'This course is available to students';
 $string['courseavailablenot'] = 'This course is not available to students';
 $string['coursebackup'] = 'Course backup';
@@ -534,7 +536,7 @@ $string['deletecoursecheck'] = 'Are you absolutely sure you want to completely d
 $string['deleted'] = 'Deleted';
 $string['deletedactivity'] = 'Deleted {$a}';
 $string['deletedcourse'] = '{$a} has been completely deleted';
-$string['deletednot'] = 'Could not delete {$a} !';
+$string['deletednot'] = 'Could not delete {$a}.';
 $string['deletecheck'] = 'Delete {$a} ?';
 $string['deletechecktype'] = 'Are you sure that you want to delete this {$a->type}?';
 $string['deletechecktypename'] = 'Are you sure that you want to delete the {$a->type} "{$a->name}"?';
@@ -1091,7 +1093,6 @@ $string['courseduration_desc'] = 'The course duration is used to calculate the d
 $string['courseenddateenabled'] = 'Course end date enabled by default';
 $string['courseenddateenabled_desc'] = 'This setting determines if the course end date will be enabled by default for new courses and set to the date calculated from the course duration.';
 $string['eventcontentviewed'] = 'Content viewed';
-$string['filter'] = 'Filter';
 $string['filteroption'] = '{$a->criteria}: {$a->value}';
 $string['filterrowlegend'] = 'Filter {$a}';
 $string['filters'] = 'Filters';
@@ -1191,7 +1192,7 @@ $string['labelvalue'] = '{$a->label}: {$a->value}';
 $string['langltr'] = 'Language direction left-to-right';
 $string['langrtl'] = 'Language direction right-to-left';
 $string['language'] = 'Language';
-$string['languagegood'] = 'This language pack is up-to-date! :-)';
+$string['languagegood'] = 'This language pack is up-to-date.';
 $string['languageselector'] = 'Language selector';
 $string['last'] = 'Last';
 $string['lastaccess'] = 'Last access';
@@ -1501,20 +1502,18 @@ $string['newuser'] = 'New user';
 $string['newusernewpasswordsubj'] = 'New user account';
 $string['newusernewpasswordtext'] = 'Hi {$a->firstname},
 
-A new account has been created for you at \'{$a->sitename}\'
-and you have been issued with a new temporary password.
+An account has been created for you at \'{$a->sitename}\'.
 
-Your login information is:
    username: {$a->username}
    password: {$a->newpassword}
-             (you will have to change your password
-              when you log in for the first time)
+
+(You will be prompted to change your password when you log in for the first time.)
 
 To start using \'{$a->sitename}\', log in at
    {$a->link}
 
-If you need help, you can contact the site administrator,
-{$a->admin}';
+If you need help, contact the site administrator,
+{$a->signoff}';
 $string['newusers'] = 'New users';
 $string['newwindow'] = 'New window';
 $string['next'] = 'Next';
@@ -1652,13 +1651,13 @@ $string['passwordsdiffer'] = 'These passwords do not match';
 $string['passwordset'] = 'Your password has been set.';
 $string['path'] = 'Path';
 $string['pathnotexists'] = 'Path doesn\'t exist in your server!';
-$string['pathslasherror'] = 'Path can\'t end with a slash!!';
-$string['paymentinstant'] = 'Use the button below to pay and be enrolled within minutes!';
+$string['pathslasherror'] = 'The path can\'t end with a slash.';
+$string['paymentinstant'] = 'Use the button below to pay and be enrolled within minutes.';
 $string['paymentpending'] = '(<small><b><u>{$a}</u></b> pending</small>)';
 $string['paymentrequired'] = 'This course requires a payment for entry.';
 $string['payments'] = 'Payments';
-$string['paymentsorry'] = 'Thank you for your payment!  Unfortunately your payment has not yet been fully processed, and you are not yet registered to enter the course "{$a->fullname}".  Please try continuing to the course in a few seconds, but if you continue to have trouble then please alert the {$a->teacher} or the site administrator';
-$string['paymentthanks'] = 'Thank you for your payment!  You are now enrolled in your course:<br />"{$a}"';
+$string['paymentsorry'] = 'Thanks for your payment. When it is processed, you will be able to enter the course {$a->fullname}.  Please wait then try again. If you continue to have trouble, contact the {$a->teacher} or the site administrator.';
+$string['paymentthanks'] = 'Thanks for your payment. You are now enrolled in the course {$a}.';
 $string['pendingrequests'] = 'Pending requests';
 $string['percents'] = '{$a}%';
 $string['periodending'] = 'Period ending ({$a})';
