@@ -63,3 +63,4 @@ UPGRADING-CURRENT.md
 /admin/tool/pluginskel
 admin/tool/behat/cli/out.txt
 config-docker.php
+config_mysql.php
