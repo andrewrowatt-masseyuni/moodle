@@ -64,3 +64,4 @@ UPGRADING-CURRENT.md
 admin/tool/behat/cli/out.txt
 config-docker.php
 config_mysql.php
+moodle405-wsl.code-workspace
