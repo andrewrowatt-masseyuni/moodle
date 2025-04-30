@@ -16,3 +16,6 @@
 [submodule "mod/webpart"]
 	path = mod/webpart
 	url = https://github.com/andrewrowatt-masseyuni/moodle-mod_webpart.git
+[submodule "local/multilanguagenames"]
+	path = local/multilanguagenames
+	url = https://github.com/andrewrowatt-masseyuni/moodle-local_multilanguagenames.git
