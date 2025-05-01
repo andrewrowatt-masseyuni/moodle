@@ -59,7 +59,6 @@ moodle-plugin-ci.phar
 phpcs.xml
 jsconfig.json
 UPGRADING-CURRENT.md
-/local/codechecker
 /admin/tool/pluginskel
 admin/tool/behat/cli/out.txt
 config-docker.php

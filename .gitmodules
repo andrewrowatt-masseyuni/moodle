@@ -19,3 +19,6 @@
 [submodule "local/multilanguagenames"]
 	path = local/multilanguagenames
 	url = https://github.com/andrewrowatt-masseyuni/moodle-local_multilanguagenames.git
+[submodule "local/codechecker"]
+	path = local/codechecker
+	url = https://github.com/moodlehq/moodle-local_codechecker.git
