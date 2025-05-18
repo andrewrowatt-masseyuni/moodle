@@ -1,0 +1,7 @@
+[submodule "local/multilanguagenames"]
+	path = local/multilanguagenames
+	url = https://github.com/andrewrowatt-masseyuni/moodle-local_multilanguagenames.git
+	branch = MOODLE_401
+[submodule "local/codechecker"]
+	path = local/codechecker
+	url = https://github.com/moodlehq/moodle-local_codechecker.git
