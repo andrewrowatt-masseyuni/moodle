@@ -1850,3 +1850,7 @@ function mod_assign_core_calendar_get_event_action_string(string $eventtype): st
 
     return get_string($identifier, 'assign', $modulename);
 }
+
+function assign_cm_info_view(cm_info $cm) {
+    return \local_assess_type\assess_type::cm_info_view($cm);
+}

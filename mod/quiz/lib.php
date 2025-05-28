@@ -2492,3 +2492,7 @@ function mod_quiz_calculate_question_stats(context $context): ?all_calculated_fo
     $report = new quiz_statistics_report();
     return $report->calculate_questions_stats_for_question_bank($cm->instance, false, false);
 }
+
+function quiz_cm_info_view(cm_info $cm) {
+    return \local_assess_type\assess_type::cm_info_view($cm);
+}

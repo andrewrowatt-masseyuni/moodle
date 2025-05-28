@@ -92,7 +92,7 @@
         $section = $this->get_section($section);
         if ((string)$section->name !== '') {
             return format_string(
-                $section->name,
+                '<i>' . $section->name . '</i>',
                 true,
                 ['context' => context_course::instance($this->courseid)]
             );
